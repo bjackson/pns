@@ -16,7 +16,7 @@ const TWITTER_HANDLE = "brett_jackson";
 const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
 
 const tld = ".poly";
-const CONTRACT_ADDRESS = "0xa0fE1D087B9f1E38c62e9eA00C3D4EEc30C11675";
+const CONTRACT_ADDRESS = "0x619a19230a120e420782b8c7ce47e84b86ce2554";
 
 const validNetworks = ["Polygon Mumbai Testnet", "Hardhat Network"];
 
@@ -421,7 +421,6 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    console.log(`Current network: ${network}`);
     if (isValidNetwork) {
       fetchMints();
     }

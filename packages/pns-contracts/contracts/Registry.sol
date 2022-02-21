@@ -133,40 +133,13 @@ contract Registry is ERC721 {
 
         require(msg.value >= _price, 'Insufficient funds for domain registration.');
 
-        string memory _name = string(abi.encodePacked(domainName, '.', tld));
-        string memory finalSvg = string(abi.encodePacked(svgPartOne, _name, svgPartTwo));
         uint256 newRecordId = _tokenIds.current();
-        uint256 length = StringUtils.strlen(domainName);
-        string memory strLen = Strings.toString(length);
 
         console.log('Registering %s.%s on the contract with tokenID %d', domainName, tld, newRecordId);
 
-        string memory json = Base64.encode(
-            bytes(
-                string(
-                    abi.encodePacked(
-                        '{"name": "',
-                        _name,
-                        '", "description": "A domain on the Polygon Name Service", "image": "data:image/svg+xml;base64,',
-                        Base64.encode(bytes(finalSvg)),
-                        '","length":"',
-                        strLen,
-                        '"}'
-                    )
-                )
-            )
-        );
-
-        string memory finalTokenUri = string(abi.encodePacked('data:application/json;base64,', json));
-
-        console.log('\n--------------------------------------------------------');
-        console.log('Final tokenURI', finalTokenUri);
-        console.log('--------------------------------------------------------\n');
-
         _safeMint(msg.sender, newRecordId);
-        // _setTokenURI(newRecordId, finalTokenUri);
+
         _setDomainOwner(domainName, msg.sender);
-        // domains[domainName] = msg.sender;
 
         names[newRecordId] = domainName;
         namesToIds[domainName] = newRecordId;
@@ -201,6 +174,10 @@ contract Registry is ERC721 {
         );
 
         string memory finalTokenUri = string(abi.encodePacked('data:application/json;base64,', json));
+
+        console.log('\n--------------------------------------------------------');
+        console.log('Final tokenURI', finalTokenUri);
+        console.log('--------------------------------------------------------\n');
 
         return finalTokenUri;
     }

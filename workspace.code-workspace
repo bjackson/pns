@@ -8,6 +8,9 @@
 		},
 		{
 			"path": "packages/web"
+		},
+		{
+			"path": "packages/dns-bridge"
 		}
 	],
 	"settings": {

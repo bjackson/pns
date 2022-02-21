@@ -1,11 +1,14 @@
 import * as dotenv from 'dotenv';
 
 import { HardhatUserConfig, task } from 'hardhat/config';
+import 'hardhat-deploy';
+import '@nomiclabs/hardhat-ethers';
 import '@nomiclabs/hardhat-etherscan';
 import '@nomiclabs/hardhat-waffle';
 import '@typechain/hardhat';
 import 'hardhat-gas-reporter';
 import 'solidity-coverage';
+import { Wallet } from 'ethers';
 
 dotenv.config();
 
@@ -21,6 +24,8 @@ task('accounts', 'Prints the list of accounts', async (taskArgs, hre) => {
 
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
+
+const initialBalance = '100000000000000000000';
 
 const config: HardhatUserConfig = {
   solidity: '0.8.10',
@@ -39,8 +44,15 @@ const config: HardhatUserConfig = {
       accounts: [
         {
           privateKey: process.env.TEST_PRIVATE_KEY || '',
-          balance: '100000000000000000000',
+          balance: initialBalance,
         },
+        ...[...Array(10).keys()].map(_ => {
+          const wallet = Wallet.createRandom();
+          return {
+            privateKey: wallet.privateKey,
+            balance: initialBalance,
+          };
+        })
       ],
     },
   },
@@ -50,6 +62,11 @@ const config: HardhatUserConfig = {
   },
   etherscan: {
     apiKey: process.env.ETHERSCAN_API_KEY,
+  },
+  namedAccounts: {
+    deployer: {
+      default: '0x049044c53c354ba4A24Cb6a4fE172329880d3B62',
+    }
   },
 };
 

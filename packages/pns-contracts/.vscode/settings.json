@@ -1,0 +1,7 @@
+{
+    "solidity.packageDefaultDependenciesContractsDirectory": "",
+    "solidity.packageDefaultDependenciesDirectory": "node_modules",
+    "mochaExplorer.require": "ts-node/register/files",
+    "mochaExplorer.files": "test/*.ts",
+    "mochaExplorer.configFile": ".mocharc.js"
+}

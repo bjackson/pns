@@ -1,0 +1,19 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "packages/pns-contracts"
+		},
+		{
+			"path": "packages/web"
+		}
+	],
+	"settings": {
+		"solidity.packageDefaultDependenciesContractsDirectory": "",
+		"solidity.packageDefaultDependenciesDirectory": "packages/pns-contracts/node_modules",
+		"slither.solcPath": "",
+		"slither.hiddenDetectors": []
+	}
+}

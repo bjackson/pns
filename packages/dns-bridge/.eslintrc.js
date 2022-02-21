@@ -3,7 +3,8 @@ module.exports = {
   'extends': ['plugin:@typescript-eslint/recommended'],
   'parserOptions': {
     'ecmaVersion': 2018,
-    'sourceType': 'module'
+    'sourceType': 'module',
+    project: './tsconfig.json',
   },
   'rules': {
     'semi': ['error', 'always'],
